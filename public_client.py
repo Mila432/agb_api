@@ -7,10 +7,10 @@ s = requests.session()
 '''
 <-------- short info -------->
 app = the app id: com.google.app
-version = 3.3.5
-map_name = if native code the main lib.so, if unity ..
-pkg_name = same as app
-patch_type = lib native code, unity unity app
+version = 1.0
+map_name = native:app lib, unity:anon:libc_malloc
+pkg_name = com.google.app
+patch_type = native:lib, unity:unity
 --->patch:
 --->pattern = has to be a list ['0x13 0x37']
 --->patch = the patched bytes 1337
@@ -30,9 +30,9 @@ def addNewPatch(app,version):
     url = base + '/%s/add' % (app)
     payload = {'app': app,
                'version': version,
-               'map_name':'lib_app.so',
+               'map_name':'anon:libc_malloc', #change this
                'pkg_name':app,
-               'patch_type':'lib',
+               'patch_type':'unity',#change this
                'patch': [{
                    'name': 'patch1',
                    'pattern': ['0x40 0x40 0x40 0x40'],
